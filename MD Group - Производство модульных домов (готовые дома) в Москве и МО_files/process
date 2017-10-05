@@ -1,0 +1,1 @@
+if (typeof pluso != "undefined") pluso.setCounter("1", "http://mdgroup.info/", undefined, {"facebook":1}, undefined);

@@ -1,0 +1,56 @@
+$(document).ready(function(){
+	// Проставляем нужную маску
+	$('.inp-email').inputmask({
+		mask: ["*{2,}@*{3,}"],
+		definitions: {"*": {validator: "^[0-9A-Za-zА-Яа-яЁё_.+-]+"}},
+		showMaskOnHover: false
+	});
+	$('.inp-phone').inputmask({
+		mask: ["+*{8,15}"],
+		definitions: {"*": {validator: "[0-9]"}},
+		showMaskOnHover: false
+	});
+
+	var clickButton = 0;
+		
+	$("#submit").on("click", function(){		
+		if($(".inp-phone").val() == "" || $(".inp-name").val() == "" || $(".inp-email").val() == "" || $(".none").val() != "")
+		{
+			$(".order-wrapper .errors").show();
+			$(".order-wrapper .errors p").hide();
+								
+			if($(".inp-name").val() == "")
+				$(".err-name").show();
+			
+			if($(".inp-phone").val() == "")
+				$(".err-phone").show();
+			
+			if($(".inp-email").val() == "")
+				$(".err-email").show();
+		}
+		else
+		{
+			clickButton++;
+			if(clickButton == 1)
+			{					
+				$(this).text("Отправляю");
+				
+				// Отправим данные в яндекс
+				yaCounter30256369.reachGoal('click_request_button');
+				
+				$(".order-wrapper .errors").hide();
+				
+				var servername = $("#server-name").val();
+				
+				var options = {
+					target: '.order-wrapper',
+					url: servername+'/ajax/request/request_action.php',
+					type: 'post'
+				};
+				
+				$('#order-form').ajaxForm(options);
+				$('#order-form').submit();
+			}
+		}
+	});
+});

@@ -1,0 +1,4 @@
+if (typeof adcm === 'object') {
+	adcm.callpixel(6325);
+	adcm.callpixel(6326);
+};
